@@ -18,7 +18,8 @@
   },
   "main": "scr/index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "test:watch": "npm test -- --watch"
   },
   "dependencies": {
     "commander": "^14.0.0",

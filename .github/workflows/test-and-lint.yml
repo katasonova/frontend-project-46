@@ -1,21 +1,26 @@
-name: test-and-lint
+name: Node CI
 
 on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+  - push
+  - pull_request
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        node-version: [23.x]
+
     steps:
       - name: Clone the repo
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: Setup Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
+        with: 
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
 
       - name: Install dependencies
         run: npm install
@@ -25,3 +30,11 @@ jobs:
 
       - name: Run tests
         run: npm test
+
+      - name: Test coverage  
+        run: make test-coverage
+        
+      - name: SonarQube Scan
+        uses: SonarSource/sonarqube-scan-action@v5
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

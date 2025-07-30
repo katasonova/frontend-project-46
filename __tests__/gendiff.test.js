@@ -19,10 +19,6 @@ test('compares identical flat JSON files', () => {
   expect(genDiff(getFixturePath('file1.json'), getFixturePath('file1.json'))).toBe(expected2)
 });
 
-test('compares empty flat JSON files', () => {
-  expect(genDiff(getFixturePath('file1.json'), getFixturePath('file1.json'))).toBe(expected2)
-});
-
 // 1. Edge cases:
 
 // What happens with two identical files?
