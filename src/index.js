@@ -1,5 +1,4 @@
 import parser from "./parser.js";
-import _ from "lodash";
 
 const genDiff = (filepath1, filepath2) => {
   const obj1 = parser(filepath1);
@@ -31,6 +30,7 @@ const genDiff = (filepath1, filepath2) => {
     }
   }
   console.log(`{\n${result.join('\n')}\n}`)
+  return `{\n${result.join('\n')}\n}`
 }
 
 export default genDiff;
